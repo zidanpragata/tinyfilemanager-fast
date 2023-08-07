@@ -1,5 +1,4 @@
 <?php
-/*require_once('ERR_HANDLER.php');*/
 define('APP_TITLE','TinyFM-Fast');
 define('VERSION','2.5.3');
 $use_auth=false;
@@ -180,7 +179,7 @@ echo "Backup {$newFileName} created";
 }else{
 throw new Exception("Could not copy file {$fileName}");
 }
-} catch (Exception $e){
+}catch(Exception $e){
 echo $e->getMessage();
 }
 }
@@ -719,7 +718,7 @@ $res=true;
 }else{
 $res=false;
 }
-} catch (Exception $e){
+}catch(Exception $e){
 $res=true;
 }
 }
@@ -1230,7 +1229,7 @@ $content=file_get_contents($file_path);
 </div>
 <div class="edit-file-actions col-xs-12 col-sm-7 col-lg-6 text-end pt-1">
 <a title="Back" class="btn btn-sm btn-outline-primary" href="?p=<?php echo urlencode(trim(FM_PATH)) ?>&amp;view=<?php echo urlencode($file) ?>">Back</a>
-<a title="<?php echo lng('BackUp') ?>" class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="backup('<?php echo urlencode(trim(FM_PATH)) ?>','<?php echo urlencode($file) ?>')">BackUp</a>
+<a title="BackUp" class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="backup('<?php echo urlencode(trim(FM_PATH)) ?>','<?php echo urlencode($file) ?>')">BackUp</a>
 <?php if($is_text){ ?>
 <?php if($isNormalEditor){ ?>
 <a title="Advanced" class="btn btn-sm btn-outline-primary" href="?p=<?php echo urlencode(trim(FM_PATH)) ?>&amp;edit=<?php echo urlencode($file) ?>&amp;env=ace">AdvancedEditor</a>
@@ -1250,7 +1249,7 @@ echo '<script>document.addEventListener("keydown", function(e){if((window.naviga
 }elseif($is_text){
 echo '<div id="editor" contenteditable="true">'.htmlspecialchars($content).'</div>';
 }else{
-fm_set_msg(lng('FILE EXTENSION HAS NOT SUPPORTED'), 'error');
+fm_set_msg('FILE EXTENSION HAS NOT SUPPORTED', 'error');
 }
 ?>
 </div>
@@ -1263,7 +1262,7 @@ $file=$_GET['chmod'];
 $file=fm_clean_path($file);
 $file=str_replace('/','', $file);
 if($file==''||(!is_file($path.'/'.$file)&&!is_dir($path.'/'.$file))){
-fm_set_msg(lng('File not found'), 'error');
+fm_set_msg('File not found', 'error');
 $FM_PATH=FM_PATH; fm_redirect(FM_SELF_URL.'?p='.urlencode($FM_PATH));
 }
 fm_show_header();
@@ -1274,9 +1273,7 @@ $mode=fileperms($path.'/'.$file);
 ?>
 <div class="path">
 <div class="card mb-2 text-white bg-dark">
-<h6 class="card-header">
-<?php echo lng('ChangePermissions') ?>
-</h6>
+<h6 class="card-header">ChangePermissions</h6>
 <div class="card-body">
 <p class="card-text">
 <?php $display_path=fm_get_display_path($file_path); ?>
@@ -1288,24 +1285,24 @@ $mode=fileperms($path.'/'.$file);
 <table class="table compact-table text-white bg-dark">
 <tr>
 <td></td>
-<td><b><?php echo lng('Owner') ?></b></td>
-<td><b><?php echo lng('Group') ?></b></td>
-<td><b><?php echo lng('Other') ?></b></td>
+<td><b>Owner</b></td>
+<td><b>Group</b></td>
+<td><b>Other</b></td>
 </tr>
 <tr>
-<td style="text-align: right"><b><?php echo lng('Read') ?></b></td>
+<td style="text-align: right"><b>Read</b></td>
 <td><label><input type="checkbox" name="ur" value="1"<?php echo ($mode & 00400)?' checked':'' ?>></label></td>
 <td><label><input type="checkbox" name="gr" value="1"<?php echo ($mode & 00040)?' checked':'' ?>></label></td>
 <td><label><input type="checkbox" name="or" value="1"<?php echo ($mode & 00004)?' checked':'' ?>></label></td>
 </tr>
 <tr>
-<td style="text-align: right"><b><?php echo lng('Write') ?></b></td>
+<td style="text-align: right"><b>Write</b></td>
 <td><label><input type="checkbox" name="uw" value="1"<?php echo ($mode & 00200)?' checked':'' ?>></label></td>
 <td><label><input type="checkbox" name="gw" value="1"<?php echo ($mode & 00020)?' checked':'' ?>></label></td>
 <td><label><input type="checkbox" name="ow" value="1"<?php echo ($mode & 00002)?' checked':'' ?>></label></td>
 </tr>
 <tr>
-<td style="text-align: right"><b><?php echo lng('Execute') ?></b></td>
+<td style="text-align: right"><b>Execute</b></td>
 <td><label><input type="checkbox" name="ux" value="1"<?php echo ($mode & 00100)?' checked':'' ?>></label></td>
 <td><label><input type="checkbox" name="gx" value="1"<?php echo ($mode & 00010)?' checked':'' ?>></label></td>
 <td><label><input type="checkbox" name="ox" value="1"<?php echo ($mode & 00001)?' checked':'' ?>></label></td>
@@ -1763,7 +1760,7 @@ try {
 $fsobj=new COM('Scripting.FileSystemObject');
 $f=$fsobj->GetFile( realpath($file) );
 $size=$f->Size;
-} catch (Exception $e){
+}catch(Exception $e){
 $size=null;
 }
 if(ctype_digit($size)){
@@ -2111,7 +2108,7 @@ if(is_file($filename)){
 try {
 $this->tar->addFile($filename);
 return true;
-} catch (Exception $e){
+}catch(Exception $e){
 return false;
 }
 }elseif(is_dir($filename)){
@@ -2132,7 +2129,7 @@ return false;
 }elseif(is_file($path.'/'.$file)){
 try {
 $this->tar->addFile($path.'/'.$file);
-} catch (Exception $e){
+}catch(Exception $e){
 return false;
 }
 }
@@ -2360,14 +2357,14 @@ BapDHdCMXv4rQ0tBvwJ1/prhXBbJr37DV8VPoIQw6t1gyGzMGC52zi4/as8N');?>
 <div class="modal-body p-4 text-center">
 <h5 class="mb-3">Are you sure want to rename?</h5>
 <p class="mb-1">
-<input type="text" name="rename_to" id="js-rename-to" class="form-control" placeholder="<?php echo lng('Enter new file name') ?>" required>
+<input type="text" name="rename_to" id="js-rename-to" class="form-control" placeholder="Enter new file name" required>
 <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
 <input type="hidden" name="rename_from" id="js-rename-from">
 </p>
 </div>
 <div class="modal-footer flex-nowrap p-0">
-<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" data-bs-dismiss="modal"><?php echo lng('Cancel') ?></button>
-<button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"><strong><?php echo lng('Okay') ?></strong></button>
+<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" data-bs-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"><strong>Okay</strong></button>
 </div>
 </form>
 </div>
@@ -2377,24 +2374,19 @@ BapDHdCMXv4rQ0tBvwJ1/prhXBbJr37DV8VPoIQw6t1gyGzMGC52zi4/as8N');?>
 <div class="modal-dialog" role="document">
 <form class="modal-content rounded-3 shadow text-white bg-dark" method="post" autocomplete="off" action="<%this.action%>">
 <div class="modal-body p-4 text-center">
-<h5 class="mb-2"><?php echo lng('Are you sure want to') ?> <%this.title%> ?</h5>
+<h5 class="mb-2">Are you sure want to <%this.title%>?</h5>
 <p class="mb-1"><%this.content%></p>
 </div>
 <div class="modal-footer flex-nowrap p-0">
-<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" data-bs-dismiss="modal"><?php echo lng('Cancel') ?></button>
+<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" data-bs-dismiss="modal">Cancel</button>
 <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
-<button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal"><strong><?php echo lng('Okay') ?></strong></button>
+<button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal"><strong>Okay</strong></button>
 </div>
 </form>
 </div>
 </div>
 </script>
-<?php
-}
-function lng(){}
-function fm_show_footer()
-{
-?>
+<?php }function fm_show_footer(){?>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
